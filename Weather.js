@@ -10,8 +10,7 @@ class AppWeather extends React.Component {
       wethDesc: '',
       temp: '',
       humidity: '',
-      pressure: 'Pressure',
-      location: [],
+      pressure: '',
       celcFarg: 'C',
       pressureBut : 'Pressure'
     };
@@ -25,7 +24,7 @@ class AppWeather extends React.Component {
                      : 
                      'Pressure'})
     }else{
-          this.setState({celcFarg: this.state.celcFarg ==='C' ? 'F' : 'C',
+      this.setState({celcFarg: this.state.celcFarg ==='C' ? 'F' : 'C',
                   temp: this.state.celcFarg === 'C' ?
                   (this.state.temp * 9/5 + 32) 
                    :
@@ -33,17 +32,14 @@ class AppWeather extends React.Component {
     }
   }
 
+  
   geoloc(){
-     navigator.geolocation.getCurrentPosition(location => {
-      this.setState({
-        location: [location.coords.latitude,
-                   location.coords.longitude]
-      })
-    });
+  return new Promise((res, rej) => navigator.geolocation.getCurrentPosition(res, rej)
+    );
   }
   
-  fetchWeather(){
-    fetch(`https://fcc-weather-api.glitch.me/api/current?lat=${this.state.location[0]}&lon=${this.state.location[1]}`)
+  fetchWeather(coordinates){
+    fetch(`https://fcc-weather-api.glitch.me/api/current?lat=${coordinates.coords.latitude}&lon=${coordinates.coords.longitude}`)
       .then(res => res.json())
       .then(
         (result) => {
@@ -67,13 +63,11 @@ class AppWeather extends React.Component {
       )
   }
   
-  componentDidMount() {
-    this.geoloc();
-    setTimeout(()=>{
-      this.fetchWeather();
-    },20)
+  async componentDidMount() {
+     const coords = await this.geoloc();
+     this.fetchWeather(coords);    
   }
-  
+ 
   render() {
     const { error, isLoaded, icon, 
            city, wethDesc, temp, humidity,
