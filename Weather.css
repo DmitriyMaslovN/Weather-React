@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=ZCOOL+XiaoWei');
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+body{
+  background-color:  hsl(240, 50%, 40%);
+}
+.main{
+   transform: translate(0, 10%);
+   text-align: center;
+}
+.container, .pressure{
+  font-family: 'Pacifico', cursive;
+  font-size: 20px;
+  color: hsl(70, 80%, 44%)
+}
+
+h1{
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 40px;
+  color: hsl(170, 80%, 60%)
+}
+.pressure{
+  cursor: pointer;
+  margin-top: 20px;
+  width: 150px;
+  border-radius: 10px;
+  outline: none;
+  transition-property: box-shadow;
+  transition-duration: 2s;
+  background: radial-gradient(blue 45%, yellow);
+  border-color: yellow;
+  padding-bottom: 5px;
+}
+.celcFarg{
+  cursor: pointer;
+  color: blue;
+  transition-property: color;
+  transition-duration: 500ms;
+}
+.celcFarg:hover{
+  color:  hsl(10, 80%, 50%);
+}
+.pressure:hover{
+  box-shadow: 0 0 20px 20px hsl(280, 40%, 60%);
+}
+.loading{
+  transform: translate(40%, 60%);
+  font-size: 30px;
+}
