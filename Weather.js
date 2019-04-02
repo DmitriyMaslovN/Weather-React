@@ -3,7 +3,7 @@ class AppWeather extends React.Component {
     super(props);
     this.state = {
       error: null,
-      isLoaded: false,
+      isLoaded: true,
       icon: '',
       city: '',
       country: '',
@@ -44,7 +44,7 @@ class AppWeather extends React.Component {
       .then(
         (result) => {
           this.setState({
-            isLoaded: true,
+            isLoaded: false,
             icon: result.weather[0].icon,
             city: result.name,
             country: result.sys.country,
@@ -65,9 +65,9 @@ class AppWeather extends React.Component {
   
   async componentDidMount() {
      const coords = await this.geoloc();
-     if(coords !== ''){
-       this.fetchWeather(coords);
-     }    
+    if(coords !== ''){
+     this.fetchWeather(coords);
+    }
   }
  
   render() {
@@ -77,7 +77,7 @@ class AppWeather extends React.Component {
            pressureBut} = this.state;
    if (error) {
       return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
+    } else if (isLoaded) {
       return <div className="loading">Loading...</div>;
     } else {
       return (
