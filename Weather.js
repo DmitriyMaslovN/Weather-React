@@ -65,7 +65,9 @@ class AppWeather extends React.Component {
   
   async componentDidMount() {
      const coords = await this.geoloc();
-     this.fetchWeather(coords);    
+     if(coords !== ''){
+       this.fetchWeather(coords);
+     }    
   }
  
   render() {
